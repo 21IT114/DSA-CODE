@@ -1,0 +1,16 @@
+/* Given a binary tree, print its nodes according to the
+"bottom-up" postorder traversal. */
+void postOrder(struct Node* node)
+{
+    if (node == NULL)
+        return;
+
+    // first recur on left subtree
+    postOrder(node->left);
+
+    // then recur on right subtree
+    postOrder(node->right);
+
+    // now deal with the node
+    cout << node->data << " ";
+}
