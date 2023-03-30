@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdbool.h>
+#define MAX_SIZE 100
+int adjMatrix[MAX_SIZE][MAX_SIZE];
+bool visited[MAX_SIZE];
+int queue[MAX_SIZE];
+int front = -1;
+int rear = -1;
+void addEdge(int u, int v)
+{
+ adjMatrix[u][v] = 1;
+ adjMatrix[v][u] = 1;
+}
+void bfs(int start, int numNodes)
+{
+ visited[start] = true;
+ queue[++rear] = start;
+ while (front != rear)
+ {
+ int currentNode = queue[++front];
+ printf("%d ", currentNode);
+ for (int i = 1; i <= numNodes; i++)
+ {
+ if (adjMatrix[currentNode][i] == 1 && visited[i] == false)
+ {
+ visited[i] = true;
+ queue[++rear] = i;
+ }
+ }
+ }
+}
+int main()
+{
+ int numNodes = 6;
+
+ addEdge(1, 2);
+ addEdge(1, 3);
+ addEdge(2, 4);
+ addEdge(2, 5);
+ addEdge(3, 5);
+ addEdge(4, 6);
+ addEdge(5, 6);
+ bfs(1, numNodes);
+ return 0;
+ }
